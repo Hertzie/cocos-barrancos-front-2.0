@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Editar {{producto.desc_producto}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre producto</ion-label>
+      <ion-input
+        type="text"
+        name="nombre"
+        [(ngModel)]="producto.desc_producto"
+      ></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Precio producto</ion-label>
+      <ion-input
+        type="number"
+        name="precio"
+        [(ngModel)]="producto.producto_precio"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-button
+          type="button"
+          color="primary"
+          expand="block"
+          size="medium"
+          (click)="editarProducto()"
+          >Actualizar</ion-button
+        >
+      </ion-label>
+    </ion-item>
+  </form>
+</ion-content>  

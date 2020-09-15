@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Productos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-item>Nota: Los productos en rojo están cancelados.</ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-list-header><strong>Lista de productos</strong></ion-list-header>
+    <ion-item-sliding *ngFor="let producto of productos">
+      <ion-item color="{{producto.estatus_activo == 1 ? '' : 'danger'}}">
+        <ion-label>{{producto.desc_producto}}</ion-label>
+        <ion-note slot="end" color="success">${{producto.producto_precio}}.00</ion-note>
+      </ion-item>
+
+      <ion-item-options side="start">
+        <ion-item-option
+          color="secondary"
+          (click)="presentarEditarModal(producto)"
+          >Editar</ion-item-option
+        >
+      </ion-item-options>
+
+      <ion-item-options side="end" *ngIf="producto.estatus_activo == 1">
+        <ion-item-option
+          color="danger"
+          (click)="presentarCancelarPrompt(producto)"
+          >Cancelar</ion-item-option
+        >
+      </ion-item-options>
+
+      <ion-item-options side="end" *ngIf="producto.estatus_activo == 0">
+        <ion-item-option
+          color="secondary"
+          (click)="presentarReactivarPrompt(producto)"
+          >Reactivar</ion-item-option
+        >
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary" (click)="presentarNuevoProductoPrompt()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
