@@ -4,12 +4,47 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
-    pathMatch: 'full'
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'productos',
+    loadChildren: () => import('./productos/productos.module').then( m => m.ProductosPageModule)
+  },
+  {
+    path: 'producto-editar',
+    loadChildren: () => import('./producto-editar/producto-editar.module').then( m => m.ProductoEditarPageModule)
+  },
+  {
+    path: 'recursos',
+    loadChildren: () => import('./recursos/recursos.module').then( m => m.RecursosPageModule)
+  },
+  {
+    path: 'empleados',
+    loadChildren: () => import('./empleados/empleados.module').then( m => m.EmpleadosPageModule)
+  },
+  {
+    path: 'usuarios',
+    loadChildren: () => import('./usuarios/usuarios.module').then( m => m.UsuariosPageModule)
+  },
+  {
+    path: 'roles',
+    loadChildren: () => import('./roles/roles.module').then( m => m.RolesPageModule)
+  },
+  {
+    path: 'pedidos',
+    loadChildren: () => import('./pedidos/pedidos.module').then( m => m.PedidosPageModule)
+  },
+  {
+    path: 'cuentas',
+    loadChildren: () => import('./cuentas/cuentas.module').then( m => m.CuentasPageModule)
   }
 ];
 

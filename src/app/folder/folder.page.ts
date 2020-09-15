@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { proxyMethods } from '@ionic/angular/directives/proxies-utils';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-folder',
@@ -8,11 +11,37 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FolderPage implements OnInit {
   public folder: string;
-
-  constructor(private activatedRoute: ActivatedRoute) { }
+  private usuario : any;
+  constructor(private activatedRoute: ActivatedRoute, private router : Router, private alertController : AlertController) { 
+  }
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
   }
 
+  async presentarlogoutPrompt(){
+    const prompt = await this.alertController.create({
+      header : 'Salir',
+      message : '¿Deseas salir de la aplicación?',
+      buttons : [
+        {
+          text : 'Cancelar',
+          role : 'cancel'
+        },
+        {
+          text : 'Aceptar',
+          handler : () => {
+            this.cerrarSesion();
+          }
+        }
+      ]
+    });
+
+    await prompt.present();
+  }
+
+  cerrarSesion(){
+    localStorage.removeItem('usuario');
+    this.router.navigateByUrl('login');
+  }
 }
