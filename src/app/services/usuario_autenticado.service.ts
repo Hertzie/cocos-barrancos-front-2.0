@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 
-@Injectable({
-    providedIn : 'root'
-})
+@Injectable()
 export default class UsuarioAutenticado{
     private usuario : any = null;
+    private paginas : any[] = [];
+
+    constructor(){}
 
     asignarUsuario(usuario){
         this.usuario = usuario;
@@ -12,5 +13,17 @@ export default class UsuarioAutenticado{
 
     obtenerUsuario(){
         return this.usuario;
+    }
+
+    eliminarUsuario(){
+        this.usuario = null;
+    }
+
+    asignarPaginas(paginas){
+        this.paginas = paginas;
+    }
+
+    obtenerPaginas(){
+        return this.paginas;
     }
 }
