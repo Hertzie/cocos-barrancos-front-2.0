@@ -52,6 +52,7 @@ export class ProductosPage implements OnInit {
                 "Debes ingresar todos los campos"
               );
             } else {
+              await this.ps.registrarProducto(data.nombre, data.precio);
               this.obtenerProductos();
               this.presentarAlertMensaje(
                 "Mensaje",

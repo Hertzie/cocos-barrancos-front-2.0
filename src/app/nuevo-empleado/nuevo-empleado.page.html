@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Nuevo Empleado</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre recurso:</ion-label>
+      <ion-input type="text" name="nombres" [(ngModel)]="nombres"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Apellido Paterno:</ion-label>
+      <ion-input type="text" name="paterno" [(ngModel)]="paterno"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Apellido Materno:</ion-label>
+      <ion-input type="text" name="materno" [(ngModel)]="materno"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Sueldo:</ion-label>
+      <ion-input type="number" name="sueldo" [(ngModel)]="sueldo"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Dirección:</ion-label>
+      <ion-input type="text" name="domicilio" [(ngModel)]="domicilio"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Teléfono:</ion-label>
+      <ion-input type="text" name="telefono" [(ngModel)]="telefono"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label>Rol</ion-label>
+      <ion-select interface="action-sheet" [(ngModel)]="iRol" name="iRol">
+        <ion-select-option *ngFor="let rol of roles" value="{{rol.idu_rol}}"
+          >{{rol.desc_rol}}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-button
+          type="button"
+          color="primary"
+          expand="block"
+          size="medium"
+          (click)="validarCampos()"
+          >Registrar</ion-button
+        >
+      </ion-label>
+    </ion-item>
+  </form>
+</ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import AutenticacionService from '../services/autenticacion.service';
+import UsuarioAutenticado from '../services/usuario_autenticado.service';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginPage implements OnInit {
   private usuario : string;
   private contrasena : string
 
-  constructor(private router: Router, private autenticacion : AutenticacionService, private alertController : AlertController) { }
+  constructor(private router: Router, private autenticacion : AutenticacionService, private alertController : AlertController, private usuarioAutenticado : UsuarioAutenticado) { }
 
   ngOnInit() {
   }
@@ -43,6 +44,8 @@ export class LoginPage implements OnInit {
           this.usuario = '';
           this.contrasena = '';
           localStorage.setItem('usuario', JSON.stringify(data.datos_usuario));
+          this.usuarioAutenticado.asignarUsuario(data.datos_usuario);
+          this.autenticacion.getPaginasRol(data.datos_usuario.idu_rol).then(resp => this.usuarioAutenticado.asignarPaginas(resp));
           this.router.navigateByUrl('folder/inbox');
           break;
         case 2:

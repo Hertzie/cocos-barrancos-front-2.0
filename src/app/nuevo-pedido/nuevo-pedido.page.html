@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Nuevo Pedido</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-item>
+      <ion-label>Nombre cliente:</ion-label>
+      <ion-input type="text" [(ngModel)]="nombreCliente" name="nombreCliente"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tipo servicio:</ion-label>
+      <ion-select interface="action-sheet" [(ngModel)]="servicioSeleccionado" name="servicio">
+        <ion-select-option *ngFor="let servicio of tipoServicios" value="{{servicio.idu_servicio}}">{{servicio.desc_servicio}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="servicioSeleccionado == 1">
+      <ion-label>Mesa:</ion-label>
+      <ion-select interface="action-sheet" name="mesa" [(ngModel)]="mesaSeleccionada">
+        <ion-select-option *ngFor="let mesa of mesas" value="{{mesa.idu_mesa}}">{{mesa.desc_mesa}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header *ngIf="productosPedido.length"><strong>Productos en pedido</strong></ion-list-header>
+    <ion-item-sliding *ngFor="let producto of productosPedido">
+      <ion-item>
+        <ion-label>{{producto.nombre_producto}}</ion-label>
+        <ion-note slot="end" color="success">
+          <ion-button *ngIf="producto.cantidad > 0" (click)="decrementarCantidadProducto(producto)">
+            <ion-icon name="remove-outline"></ion-icon>
+          </ion-button>
+          <ion-button color="medium" disabled>{{producto.cantidad}}</ion-button>
+          <ion-button (click)="incrementarCantidadProducto(producto)">
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
+        </ion-note>
+      </ion-item>
+
+      <ion-item-options side="start">
+        <ion-item-option
+          color="danger"
+          (click)="elimininarProductoPedido(producto)"
+          >Eliminar</ion-item-option
+        >
+      </ion-item-options>
+    </ion-item-sliding>
+    <br>
+    <ion-button color="primary" expand="block" size="medium" *ngIf="productosPedido.length && servicioSeleccionado" (click)="registrarPedido()">Registrar pedido</ion-button>
+  </ion-list>
+  
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary" (click)="presentarAgregarProductoPrompt()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

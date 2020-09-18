@@ -1,9 +1,50 @@
 <ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Pedidos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
   <ion-toolbar>
-    <ion-title>pedidos</ion-title>
+    <ion-item>
+      <ion-label>Estatus pedido:</ion-label>
+      <ion-select interface="popover" [(ngModel)]="estatusPedidos" name="estatus">
+        <ion-select-option value="0">Todos</ion-select-option>
+        <ion-select-option value="1">Encargado</ion-select-option>
+        <ion-select-option value="2">Preparado</ion-select-option>
+      </ion-select>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let pedido of pedidos">
+      <ion-item>
+        <ion-label>{{pedido.cliente}}</ion-label>
+        <ion-note slot="end" color="success">{{pedido.nom_tipo_servicio}}</ion-note>
+      </ion-item>
 
+      <ion-item-options side="start">
+        <ion-item-option
+          color="danger"
+          (click)="cancelarPedido(pedido)"
+          >Cancelar</ion-item-option
+        >
+      </ion-item-options>
+
+      <ion-item-options side="end">
+        <ion-item-option
+          color="primary"
+          (click)="verDetallePedido(pedido)"
+          >Detalle</ion-item-option
+        >
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary" (click)="presentarNuevoPedidoModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

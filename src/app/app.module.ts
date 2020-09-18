@@ -16,13 +16,20 @@ import { FormsModule } from '@angular/forms';
 import AutenticacionService from './services/autenticacion.service';
 import UsuarioAutenticado from './services/usuario_autenticado.service';
 import ProductosService from './services/productos.service';
+import EmpleadosService from './services/empleados.service';
+import ConfiguracionesService from './services/configuraciones.service';
+import PedidosService from './services/pedidos.service';
 
 //Modales
 import { ProductoEditarPage } from './producto-editar/producto-editar.page';
+import { NuevoEmpleadoPage } from './nuevo-empleado/nuevo-empleado.page';
+import { NuevoPedidoPage } from './nuevo-pedido/nuevo-pedido.page';
+import { PedidoDetallePage } from './pedido-detalle/pedido-detalle.page';
+
 
 @NgModule({
-  declarations: [AppComponent, ProductoEditarPage],
-  entryComponents: [ProductoEditarPage],
+  declarations: [AppComponent, ProductoEditarPage, NuevoEmpleadoPage, NuevoPedidoPage, PedidoDetallePage],
+  entryComponents: [ProductoEditarPage, NuevoEmpleadoPage, NuevoPedidoPage, PedidoDetallePage],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -36,6 +43,9 @@ import { ProductoEditarPage } from './producto-editar/producto-editar.page';
     AutenticacionService,
     UsuarioAutenticado,
     ProductosService,
+    EmpleadosService,
+    ConfiguracionesService,
+    PedidosService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { proxyMethods } from '@ionic/angular/directives/proxies-utils';
 import { async } from '@angular/core/testing';
 
@@ -12,7 +12,7 @@ import { async } from '@angular/core/testing';
 export class FolderPage implements OnInit {
   public folder: string;
   private usuario : any;
-  constructor(private activatedRoute: ActivatedRoute, private router : Router, private alertController : AlertController) { 
+  constructor(private activatedRoute: ActivatedRoute, private router : Router, private alertController : AlertController, private navController : NavController) { 
   }
 
   ngOnInit() {
@@ -42,6 +42,7 @@ export class FolderPage implements OnInit {
 
   cerrarSesion(){
     localStorage.removeItem('usuario');
-    this.router.navigateByUrl('login');
+    //this.router.navigateByUrl('login');
+    this.navController.navigateRoot('/login');
   }
 }

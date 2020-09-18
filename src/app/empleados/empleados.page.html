@@ -1,9 +1,59 @@
 <ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Empleados</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+
   <ion-toolbar>
-    <ion-title>empleados</ion-title>
+    <ion-item>Nota: Los empleados en rojo están dados de baja.</ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-list-header><strong>Lista de empleados</strong></ion-list-header>
+    <ion-item-sliding *ngFor="let empleado of empleados">
+      <ion-item color="{{empleado.estatus_activo == 1 ? '' : 'danger'}}">
+        <ion-label>{{empleado.empleado_nombres}}</ion-label>
+        <ion-note slot="end" color="primary">{{empleado.desc_rol}}</ion-note>
+      </ion-item>
 
+      <ion-item-options
+      side="start"
+      *ngIf="empleado.idu_rol != 1"
+    >
+      <ion-item-option
+        color="secondary"
+        >Editar</ion-item-option
+      >
+    </ion-item-options>
+
+    <ion-item-options
+      side="end"
+      *ngIf="empleado.idu_rol != 1 && empleado.estatus_activo == 1"
+    >
+      <ion-item-option color="danger"
+        >Baja</ion-item-option
+      >
+    </ion-item-options>
+
+    <ion-item-options
+      side="end"
+      *ngIf="empleado.idu_rol != 1 && empleado.estatus_activo == 0"
+    >
+      <ion-item-option
+        color="secondary"
+        >Reactivar</ion-item-option
+      >
+    </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary" (click)="presentarPromptEmpleadoNuevo()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
